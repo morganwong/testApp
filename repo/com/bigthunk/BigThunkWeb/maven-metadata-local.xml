@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>com.bigthunk</groupId>
+  <artifactId>BigThunkWeb</artifactId>
+  <versioning>
+    <versions>
+      <version>0.0.4-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20150721093140</lastUpdated>
+  </versioning>
+</metadata>

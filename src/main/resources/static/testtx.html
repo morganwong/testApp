@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script src="https://js.stripe.com/v2/"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		console.log("doc is ready !");
+		
+
+		Stripe.setPublishableKey('pk_test_CERfNtDmLooxJYsj1mcaEFgD');
+		
+		$('button').click(function(){
+			dt(this);
+// 			$(this).trigger("click");
+		});
+		
+		var amt = 1.0;
+		
+		function dt(t){
+			var token;
+			
+			Stripe.card.createToken({
+			  number: "4242424242424242",
+			  cvc: "123",
+			  exp_month: "12",
+			  exp_year: "17" 
+			}, stripeResponseHandler);
+			
+			function stripeResponseHandler(s, r){
+				console.log("in stripe response handler !!!");
+				console.log(s);
+				console.log(r);
+				token = r.id;
+				
+				
+				$.post("/test/doTx?token=" + token + "&amt=" + amt, function(data){
+					console.log("SUCCESS from post to doTx !");
+					console.log("data / response incoming...");
+					console.log(data);
+					console.log("amt is " + amt);
+					amt = parseFloat(amt);
+					amt = amt + 1.11;
+					amt = amt.toFixed(2);
+// 					alert("Transaction complete !");
+					$(t).trigger("click");
+				});
+			}
+		}
+		
+// 		var si = setInterval(function(){
+// 			var token;
+			
+// 			Stripe.card.createToken({
+// 			  number: "4242424242424242",
+// 			  cvc: "123",
+// 			  exp_month: "12",
+// 			  exp_year: "17" 
+// 			}, stripeResponseHandler);
+			
+// 			function stripeResponseHandler(s, r){
+// 				console.log("in stripe response handler !!!");
+// 				console.log(s);
+// 				console.log(r);
+// 				token = r.id;
+				
+				
+// 				$.post("/test/doTx?token=" + token, function(data){
+// 					console.log("SUCCESS from post to doTx !");
+// 					console.log("data / response incoming...");
+// 					console.log(data);
+// // 					alert("Transaction complete !");
+// 				});
+// 			}
+// 		}, 12000);
+		
+// 		$('button').click(function(){
+// 			var token;
+			
+// 			Stripe.setPublishableKey('pk_test_CERfNtDmLooxJYsj1mcaEFgD');
+			
+// 			Stripe.card.createToken({
+// 			  number: "4242424242424242",
+// 			  cvc: "123",
+// 			  exp_month: "12",
+// 			  exp_year: "17" 
+// 			}, stripeResponseHandler);
+			
+// 			function stripeResponseHandler(s, r){
+// 				console.log("in stripe response handler !!!");
+// 				console.log(s);
+// 				console.log(r);
+// 				token = r.id;
+				
+				
+// 				$.post("/test/doTx?token=" + token, function(data){
+// 					console.log("SUCCESS from post to doTx !");
+// 					console.log("data / response incoming...");
+// 					console.log(data);
+// 					alert("Transaction complete !");
+// 				});
+// 			}
+// 		});
+		
+// 		function doTx(){
+// 			var token;
+			
+// 			Stripe.card.createToken({
+// 			  number: "4242424242424242",
+// 			  cvc: "123",
+// 			  exp_month: "12",
+// 			  exp_year: "17" 
+// 			}, stripeResponseHandler);
+			
+// 			function stripeResponseHandler(s, r){
+// 				console.log("in stripe response handler !!!");
+// 				console.log(s);
+// 				console.log(r);
+// 				token = r.id;
+				
+				
+// 				$.post("/test/doTx?token=" + token, function(data){
+// 					console.log("SUCCESS from post to doTx !");
+// 					console.log("data / response incoming...");
+// 					console.log(data);
+// // 					alert("Transaction complete !");
+// 				});
+// 			}
+// 		}
+		
+	});
+</script>
+
+</head>
+<body style="text-align: center;">
+
+	<button>Do Transaction !</button>
+
+</body>
+</html>
